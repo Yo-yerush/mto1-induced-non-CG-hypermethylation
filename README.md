@@ -16,4 +16,4 @@ The scripts used in this study are available in the `scripts/` folder of this re
 ## Methylome analysis report
 
 The full HTML report can be viewed in the browser here:  
-[Open the methylome analysis report](https://YOUR-USERNAME.github.io/mto1-induced-non-CG-hypermethylation/Methylome.At_report_mto1_vs_wt.html)
+[Open the methylome analysis report](https://Yo-yerush.github.io/mto1-induced-non-CG-hypermethylation/Methylome.At_report_mto1_vs_wt.html)
