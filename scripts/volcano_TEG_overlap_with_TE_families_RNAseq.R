@@ -13,11 +13,11 @@ with_manual_Derives_from = F
 ###   ###    ###   ###   ###
 
 
-TEG_annotations <- read.csv("C:/Users/yonatany/Migal/Rachel Amir Team - General/Arabidopsis_db/Methylome.At_annotations.csv.gz") %>%
+TEG_annotations <- read.csv("C:/Users/yonatany/Migal/Rachel Amir Team - General/Arabidopsis_db/RA_costume_annotations_files/Methylome.At_annotations.csv.gz") %>%
   filter(type == "transposable_element_gene") %>%
   dplyr::select(-type, -gene_model_type)
 
-gene_2_TE_ids <- read.csv("C:/Users/yonatany/Migal/Rachel Amir Team - General/Arabidopsis_db/Methylome.At_description_file.csv.gz") %>%
+gene_2_TE_ids <- read.csv("C:/Users/yonatany/Migal/Rachel Amir Team - General/Arabidopsis_db/RA_costume_annotations_files/Methylome.At_description_file.csv.gz") %>%
   filter(!is.na(Derives_from)) %>%
   select(gene_id, Derives_from)
 
@@ -71,9 +71,8 @@ if (with_manual_Derives_from) {
 }
 #################################################
 ### merge with RNAseq results
-RNA_file <- read.csv("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/rnaseq_23/met23/mto1_vs_wt/all.transcripts.mto1_vs_wt.DE.csv") %>%
+RNA_file <- read.csv("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/rnaseq_23/met23/mto1_vs_wt/all_genes_results_mto1_vs_wt.csv") %>%
   # filter(gene_model_type == "transposable_element_gene") %>%
-  dplyr::rename(gene_id = "locus_tag") %>%
   .[, 1:4] %>%
   filter(!is.na(padj))
 
@@ -165,8 +164,8 @@ mydf$geneCat <- with(mydf, ifelse(padj < 0.05 & log2FoldChange > 1, "Upregulated
                                   ifelse(padj < 0.05 & log2FoldChange < -1, "Downregulated", "nonDE")))
 mydf$geneCat <- factor(mydf$geneCat, levels = c("Upregulated", "Downregulated", "nonDE"))
 
-svg("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/retro-TEGs_volcano.svg",
-    width = 3.2, height = 1.65, family = "serif")
+
+tiff("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/RNAseq_retro-TEGs_volcano.tif", width = 1.6, height = 1.25, units = "in", res = 600, family = "serif")
 
 ggplot(mydf, aes_string(x = "log2FoldChange", y = "-log10(padj)", color = "Transposon_Super_Family")) +
   geom_point(alpha = 0.4, size = 1) +
@@ -176,12 +175,14 @@ ggplot(mydf, aes_string(x = "log2FoldChange", y = "-log10(padj)", color = "Trans
   
 #theme_classic() + #
   theme_bw() +
+  theme(legend.position = "none") +
   scale_colour_manual(
     name = "Transposon\nSuper-Family", # This changes the legend title
     values = c("LTR/Gypsy" = "#842dcc", "LTR/Copia" = "#159e35", "LINE/L1" = "#c79924"),
     limits = c("LTR/Gypsy", "LTR/Copia", "LINE/L1")
   ) +
-  guides(color = guide_legend(override.aes = list(size = 2.5, alpha = 0.65))) +
+  scale_y_continuous(breaks = c(0, 5, 10, 15), labels = c("0", "5", " 10", " 15")) +
+  # guides(color = guide_legend(override.aes = list(size = 2.5, alpha = 0.65))) +
 
   # Add a vertical line starting from y=5 at x=1
   geom_segment(aes(x = rep(1, nrow(mydf)), y = -log10(0.05), xend = 1, yend = Inf), 

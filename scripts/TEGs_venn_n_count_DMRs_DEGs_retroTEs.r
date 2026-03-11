@@ -65,14 +65,15 @@ venn.diagram(
     #     "\nunique TEGs                    \noverlap DMRs                   ",
     #     "\n\n\n\n\n\n\n\n\nDE-TEGs"
     # ),
-    category.names = c(
-        "TEGs overlap DMRs   ",
-        "DE-TEGs                "
-    ),
-    filename = paste0("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/DMRs_over_de-retro-TEGs_VennDiagram.tif"),
+    category.names = c("", ""),
+    # category.names = c(
+    #     "TEGs overlap DMRs   ",
+    #     "DE-TEGs                "
+    # ),
+    filename = paste0("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/DMRs_over_de-retro-TEGs_VennDiagram.svg"),
     disable.logging = T,
     output = T,
-    imagetype = "tiff",
+    imagetype = "svg",
     height = 1.25,
     width = 1.25,
     units = "in",
@@ -84,7 +85,7 @@ venn.diagram(
     # col = c("white", "#4d4d4d"),
     # col = rep("white", length(gene_sets)),
     col = rep("#3a3a3a", length(gene_sets)),
-    label.col = "#4b4b4b",
+    label.col = NA, # "#4b4b4b",
     cex = cex,
     fontfamily = "serif",
     cat.cex = cex,

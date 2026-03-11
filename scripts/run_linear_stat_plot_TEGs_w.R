@@ -406,7 +406,7 @@ do.call(multiplot, c(
     )
 ))
 
-grid::grid.text("Methylation level", x = 0.575, y = 0.075, gp = grid::gpar(fontsize = 16, fontfamily = "serif"))
+grid::grid.text("Methylation level", x = 0.573, y = 0.115, gp = grid::gpar(fontsize = 16, fontfamily = "serif"))
 grid::grid.text(expression(bold("WT")), x = 0.93, y = 0.775, gp = grid::gpar(fontsize = 13, fontfamily = "serif", col = var1_col))
 grid::grid.text(expression(bolditalic("mto1")), x = 0.93, y = 0.7, gp = grid::gpar(fontsize = 13, fontfamily = "serif", col = var2_col))
 

@@ -57,7 +57,7 @@ TE_gr <- makeGRangesFromDataFrame(TE_file, keep.extra.columns = T)
     dplyr::rename(log2FoldChange = log2FC) %>%
     .[, c("gene_id", "log2FoldChange", "pValue")]
 
-  TEG_file <- read.csv("C:/Users/yonatany/Migal/Rachel Amir Team - General/Arabidopsis_db/Methylome.At_annotations.csv.gz") %>%
+  TEG_file <- read.csv("C:/Users/yonatany/Migal/Rachel Amir Team - General/Arabidopsis_db/RA_costume_annotations_files/Methylome.At_annotations.csv.gz") %>%
     filter(type == "transposable_element_gene") %>%
     merge.data.frame(., DMR_file, by = "gene_id") %>%
     dplyr::select(-type, -gene_model_type) %>%
@@ -136,24 +136,21 @@ TE_gr <- makeGRangesFromDataFrame(TE_file, keep.extra.columns = T)
   #))
   #mydf$geneCat <- factor(mydf$geneCat, levels = c("Upregulated", "Downregulated", "nonDE"))
 
-  svg(paste0("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/DMRs_on_retro-TEGs_volcano_",context,".svg"),
-    width = 3.2, height = 1.65, family = "serif"
-  )
-
-  ggplot(mydf, aes_string(x = "log2FoldChange", y = "-log10(pValue)", color = "Transposon_Super_Family")) +
-    geom_point(alpha = 0.4, size = 1) +
+  vplot <- ggplot(mydf, aes_string(x = "log2FoldChange", y = "-log10(pValue)", color = "Transposon_Super_Family")) +
+    geom_point(alpha = 0.4, size = 0.65) +
     # change axis titles
     xlab("log2(Fold-Change)") +
     ylab("-log10(padj)") +
-
     # theme_classic() + #
     theme_bw() +
+    theme(legend.position = "none") +
     scale_colour_manual(
-      name = "Transposon\nSuper-Family", # This changes the legend title
+      name = "",
       values = c("LTR/Gypsy" = "#842dcc", "LTR/Copia" = "#159e35", "LINE/L1" = "#c79924"),
       limits = c("LTR/Gypsy", "LTR/Copia", "LINE/L1")
     ) +
-    guides(color = guide_legend(override.aes = list(size = 2.5, alpha = 0.65))) +
+    scale_y_continuous(breaks = c(0, 50, 150, 250)) +
+    # guides(color = guide_legend(override.aes = list(size = 2.5, alpha = 0.65))) +
 
     # Add a vertical line starting from y=5 at x=1
     geom_segment(aes(x = rep(x_pos, nrow(mydf)), y = -log10(0.05), xend = x_pos, yend = Inf),
@@ -171,9 +168,17 @@ TE_gr <- makeGRangesFromDataFrame(TE_file, keep.extra.columns = T)
       col = "gray20", alpha = 0.6, size = 0.4, linetype = "dashed"
     )
 
+  tiff(paste0("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/DMRs_on_retro-TEGs_volcano_",context,".tif"), width = 1.6, height = 1.25, units = "in", res = 600, family = "serif"
+  )
+  (vplot)
   dev.off()
 
-  ####################################
+  #######################################
 
-
-
+  # vplot_with_legend <- vplot + theme(legend.position = "right")
+  # legend_plot <- cowplot::get_legend(vplot_with_legend)
+  # tiff("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/retro-TEGs_volcano_legend.tif",
+  #   width = 1.5, height = 1, units = "in", res = 600, family = "serif"
+  # )
+  # ggdraw(legend_plot)
+  # dev.off()
