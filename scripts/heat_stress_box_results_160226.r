@@ -6,7 +6,7 @@ library(tidyr)
 library(grid)
 
 # Read the CSV file
-heat_res <- read.csv("C:\\Users\\YonatanY\\Migal\\Rachel Amir Team - General\\yonatan\\methionine\\heat_sress_data_extracted_from_rons_file.csv") %>%
+heat_res <- read.csv("C:/Users/YonatanY/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/heat_sress_40_data_extracted_from_rons_file.csv") %>%
 pivot_longer(cols = everything(), names_to = "variable", values_to = "value") %>%
 filter(!grepl("mto3", variable)) %>%
 mutate(
@@ -23,31 +23,42 @@ rename(name = variable)
 heat_res$name <- factor(heat_res$name, levels = c("wt_c", "wt_h", "mto1_c", "mto1_h"))
 heat_res$genotype <- factor(ifelse(grepl("wt", heat_res$name), "WT", "mto1"), levels = c("WT", "mto1"))
 
-# ANOVA + Tukey post-hoc test
-aov_res <- aov(value ~ name * genotype, data = heat_res)
-tukey_res <- TukeyHSD(aov_res)
-print(summary(aov_res))
-print(tukey_res)
-
-# Extract compact letter display (CLD)
-tukey_pvals <- tukey_res$name[, "p adj"]
-cld <- multcompLetters(tukey_pvals)$Letters
-
-# Create label dataframe with y positions for each group
-# (adjust y_pos values to position letters above each box)
+### use Ron's stat ### # ANOVA + Tukey post-hoc test
+### use Ron's stat ### aov_res <- aov(value ~ name * genotype, data = heat_res)
+### use Ron's stat ### tukey_res <- TukeyHSD(aov_res)
+### use Ron's stat ### print(summary(aov_res))
+### use Ron's stat ### print(tukey_res)
+### use Ron's stat ### 
+### use Ron's stat ### # Extract compact letter display (CLD)
+### use Ron's stat ### tukey_pvals <- tukey_res$name[, "p adj"]
+### use Ron's stat ### cld <- multcompLetters(tukey_pvals)$Letters
+### use Ron's stat ### 
+### use Ron's stat ### # Create label dataframe with y positions for each group
+### use Ron's stat ### # (adjust y_pos values to position letters above each box)
+### use Ron's stat ### label_df <- data.frame(
+### use Ron's stat ###     name = factor(names(cld), levels = c("wt_c", "wt_h", "mto1_c", "mto1_h")),
+### use Ron's stat ###     letter = toupper(as.character(cld)),
+### use Ron's stat ###     y_pos = c(
+### use Ron's stat ###         "wt_c" = max(heat_res[heat_res$name == "wt_c", "value"], na.rm = T)*1.75,
+### use Ron's stat ###         "wt_h" = max(heat_res[heat_res$name == "wt_h", "value"], na.rm = T)*1.2,
+### use Ron's stat ###         "mto1_c" = max(heat_res[heat_res$name == "mto1_c", "value"], na.rm = T)*1.25,
+### use Ron's stat ###         "mto1_h" = max(heat_res[heat_res$name == "mto1_h", "value"], na.rm = T)*1.1
+### use Ron's stat ###     )[names(cld)]
+### use Ron's stat ### )
 label_df <- data.frame(
-    name = factor(names(cld), levels = c("wt_c", "wt_h", "mto1_c", "mto1_h")),
-    letter = toupper(as.character(cld)),
+    name = factor(c("wt_c", "wt_h", "mto1_c", "mto1_h"), levels = c("wt_c", "wt_h", "mto1_c", "mto1_h")),
+    letter = c("B", "A", "B", "C"),
     y_pos = c(
-        "wt_c" = max(heat_res[heat_res$name == "wt_c", "value"], na.rm = T)*12,
-        "wt_h" = max(heat_res[heat_res$name == "wt_h", "value"])*1.5,
-        "mto1_c" = max(heat_res[heat_res$name == "mto1_c", "value"], na.rm = T)*4.25,
-        "mto1_h" = max(heat_res[heat_res$name == "mto1_h", "value"], na.rm = T)*1.15
-    )[names(cld)]
+        "wt_c" = max(heat_res[heat_res$name == "wt_c", "value"], na.rm = T)*1.85,
+        "wt_h" = max(heat_res[heat_res$name == "wt_h", "value"], na.rm = T)*1.225,
+        "mto1_c" = max(heat_res[heat_res$name == "mto1_c", "value"], na.rm = T)*1.35,
+        "mto1_h" = max(heat_res[heat_res$name == "mto1_h", "value"], na.rm = T)*1.125
+    )[c("wt_c", "wt_h", "mto1_c", "mto1_h")]
 )
 
+
 {
-svg("C:/Users/YonatanY/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/heat_from_ron_results_160226.svg", width = 2.85, height = 3, family = "serif")
+svg("C:/Users/YonatanY/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/heat_40_from_ron_results_160226.svg", width = 2.85, height = 3, family = "serif")
 p <- ggplot(heat_res, aes(x = name, y = value, fill = name)) +
     geom_boxplot(data = heat_res,
                  alpha = 0.7, outlier.shape = NA) +
@@ -62,11 +73,11 @@ p <- ggplot(heat_res, aes(x = name, y = value, fill = name)) +
     scale_color_manual(values = c("WT" = "gray20", "mto1" = "#b6801d"),
                        labels = c("WT" = "WT", "mto1" = expression(italic("mto1")))) +
     guides(fill = "none", color = guide_legend(title = NULL, override.aes = list(size = 3))) +
-    scale_x_discrete(labels = c("wt_c" = "RT", "wt_h" = "37°C",
-                                "mto1_c" = "RT", "mto1_h" = "37°C")) +
+    scale_x_discrete(labels = c("wt_c" = "RT", "wt_h" = "40°C",
+                                "mto1_c" = "RT", "mto1_h" = "40°C")) +
     labs(x = NULL, y = "Total radiant efficiency (%)") +
     # labs(x = NULL, y = "Total radiant efficiency (% of control)") +
-    scale_y_continuous(limits = c(0, 30000)) +
+    scale_y_continuous(limits = c(0, 2200)) +
     theme_classic() +
     theme(legend.position = "none",
           axis.text.x = element_text(size = 12, colour = "black"),
