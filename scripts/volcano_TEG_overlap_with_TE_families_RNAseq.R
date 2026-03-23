@@ -165,7 +165,7 @@ mydf$geneCat <- with(mydf, ifelse(padj < 0.05 & log2FoldChange > 1, "Upregulated
 mydf$geneCat <- factor(mydf$geneCat, levels = c("Upregulated", "Downregulated", "nonDE"))
 
 
-tiff("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/RNAseq_retro-TEGs_volcano.tif", width = 1.6, height = 1.25, units = "in", res = 600, family = "serif")
+tiff("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/RNAseq_retro-TEGs_volcano.tif", width = 1.75, height = 1.25, units = "in", res = 600, family = "serif")
 
 ggplot(mydf, aes_string(x = "log2FoldChange", y = "-log10(padj)", color = "Transposon_Super_Family")) +
   geom_point(alpha = 0.4, size = 1) +

@@ -168,7 +168,7 @@ TE_gr <- makeGRangesFromDataFrame(TE_file, keep.extra.columns = T)
       col = "gray20", alpha = 0.6, size = 0.4, linetype = "dashed"
     )
 
-  tiff(paste0("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/DMRs_on_retro-TEGs_volcano_",context,".tif"), width = 1.6, height = 1.25, units = "in", res = 600, family = "serif"
+  tiff(paste0("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/DMRs_on_retro-TEGs_volcano_",context,".tif"), width = 1.75, height = 1.25, units = "in", res = 600, family = "serif"
   )
   (vplot)
   dev.off()

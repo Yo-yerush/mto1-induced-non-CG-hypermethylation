@@ -36,6 +36,11 @@ gene_sets_1 <- list(
     DEGs = DEGs$gene_id
 )
 
+gene_sets_Pr <- list(
+    Promoter = Promoters$gene_id,
+    DEGs = DEGs$gene_id
+)
+
 gene_sets_CDS <- list(
     CDS = CDS$gene_id,
     DEGs = DEGs$gene_id
@@ -84,6 +89,36 @@ venn.diagram(
     cat.default.pos = "outer",
     cat.fontface = 2,
     cat.fontfamily = "serif"
+)
+
+### Promoters
+ann_name <- "Promoters"
+venn.diagram(
+    x = gene_sets_Pr,
+    # category.names = c(ann_name, "DEGs"),
+    category.names = c("",""),
+    filename = paste0("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/DMRs_over_DEGs_", ann_name, "_unique_VennDiagram.svg"),
+    disable.logging = T,
+    output = T,
+    imagetype = "svg",
+    height = 0.8,
+    width = 0.8,
+    resolution = resolution,
+    lwd = 1,
+    fill = venn_colors[2:3],
+    alpha = rep(0.45, 2),
+    col = rep("white", 2),
+    cex = cex,
+    fontfamily = "serif",
+    cat.cex = cex,
+    cat.default.pos = "outer",
+    cat.pos = c(180, 180),
+    cat.fontface = 2,
+    cat.fontfamily = "serif",
+    ext.pos = 0, ,
+    ext.percent = rep(0.1, 3),
+    ext.dist = -0.45,
+    ext.length = 0.85
 )
 
 ### CDS
