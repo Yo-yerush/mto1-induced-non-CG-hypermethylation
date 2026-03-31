@@ -137,7 +137,7 @@ TE_gr <- makeGRangesFromDataFrame(TE_file, keep.extra.columns = T)
   #mydf$geneCat <- factor(mydf$geneCat, levels = c("Upregulated", "Downregulated", "nonDE"))
 
   vplot <- ggplot(mydf, aes_string(x = "log2FoldChange", y = "-log10(pValue)", color = "Transposon_Super_Family")) +
-    geom_point(alpha = 0.4, size = 0.65) +
+    geom_point(alpha = 0.4, size = 0.75) +
     # change axis titles
     xlab("log2(Fold-Change)") +
     ylab("-log10(padj)") +

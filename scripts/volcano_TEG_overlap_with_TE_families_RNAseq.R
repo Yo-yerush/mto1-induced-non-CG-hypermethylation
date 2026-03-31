@@ -168,7 +168,7 @@ mydf$geneCat <- factor(mydf$geneCat, levels = c("Upregulated", "Downregulated", 
 tiff("C:/Users/yonatany/Migal/Rachel Amir Team - General/yonatan/methionine/mto1_paper/RNAseq_retro-TEGs_volcano.tif", width = 1.75, height = 1.15, units = "in", res = 600, family = "serif")
 
 ggplot(mydf, aes_string(x = "log2FoldChange", y = "-log10(padj)", color = "Transposon_Super_Family")) +
-  geom_point(alpha = 0.4, size = 1) +
+  geom_point(alpha = 0.4, size = 0.75) +
   # change axis titles
   xlab("log2(Fold-Change)") +
   ylab("-log10(padj)") +
