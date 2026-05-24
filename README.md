@@ -1,6 +1,6 @@
 **Elevated methionine induces TE non-CG hypermethylation and reduces heat tolerance in *Arabidopsis***
 
-**Yonatan Yerushalmy**<sup>1,2</sup>, **Michal Lieberman-Lazarovich**<sup>3</sup>, **Dave XXX**<sup>4</sup>, **Ron Mittler**<sup>4</sup>, **Rachel Amir**<sup>1</sup>, **Yael Hacham**<sup>1</sup>
+**Yonatan Yerushalmy**<sup>1,2</sup>, **Michal Lieberman-Lazarovich**<sup>3</sup>, **Devasantosh Mohanty**<sup>4</sup>, **Ron Mittler**<sup>4</sup>, **Rachel Amir**<sup>1</sup>, **Yael Hacham**<sup>1</sup>
 
 <sup>1</sup> Migal, Galilee Research Institute, P.O. Box 831, Kiryat Shmona 1101602, Israel  
 <sup>2</sup> Faculty of Biology, Technion–Israel Institute of Technology, Haifa 3200004, Israel  
