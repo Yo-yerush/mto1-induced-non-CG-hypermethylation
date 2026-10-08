@@ -13,8 +13,6 @@ Published: 27 July 2026 (*Plant Physiology*)
 <sup>4</sup> Division of Plant Science and Technology, College of Agriculture Food and Natural Resources, Christopher S. Bond Life Sciences Center, University of Missouri, 1201 Rollins St., Columbia, MO 65211, United States  
 <sup>5</sup> Migal, Galilee Research Institute, P.O. Box 831, Kiryat Shmona 1101602, Israel 
 
-This repository contains scripts and output files used for methylome data analysis, including quality control, downstream analyses, and visualization.
-
 ---
 
 ## Code availability
