@@ -1,4 +1,4 @@
-# Elevated methionine induces TE non-CG hypermethylation and reduces heat tolerance in *Arabidopsis*
+# Methionine overaccumulation reinforces heterochromatic non-CG hypermethylation and transposon silencing in *Arabidopsis*
 
 **Yonatan Yerushalmy**<sup>1,2</sup>, **Michal Lieberman-Lazarovich**<sup>3</sup>, **Devasantosh Mohanty**<sup>4</sup>, **Ron Mittler**<sup>4</sup>, **Rachel Amir**<sup>1</sup>, **Yael Hacham**<sup>1</sup>
 
